@@ -17,7 +17,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://YOUR_USERNAME.github.io/crime-report-app",
+  "homepage": "https://Necromancercoding.github.io/crime-report-app",
   "browserslist": {
   "production": [
     ">0.2%",
