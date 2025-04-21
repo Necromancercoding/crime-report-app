@@ -1,16 +1,21 @@
-// src/App.js
 import React, { useState } from 'react';
-import './App.css';  // Importing CSS file
-import Signup from './components/Signup';  // Import the Signup component
-import Login from './components/Login';    // Import the Login component
+import './App.css';
+import Signup from './components/Signup';
+import Login from './components/Login';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Function to set the login state
-  const handleLogin = () => setIsLoggedIn(true);
-  const handleLogout = () => setIsLoggedIn(false);
+  const handleLogin = (token) => {
+    localStorage.setItem('token', token);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  };
 
   return (
     <Router>
@@ -19,15 +24,9 @@ function App() {
           <h1>Crime Reporter</h1>
           <nav>
             <ul>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/login">Login</a>
-              </li>
-              <li>
-                <a href="/signup">Sign Up</a>
-              </li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/signup">Sign Up</a></li>
             </ul>
           </nav>
         </header>
