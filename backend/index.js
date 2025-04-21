@@ -2,14 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
+const path = require('path'); // Required to resolve the build directory
 
 const authRoutes = require('./routes/auth');
 const reportRoutes = require('./routes/reports');
 
 const app = express();
-
-// Middleware setup
 app.use(cors());
 app.use(express.json());
 
@@ -18,20 +16,21 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch(err => console.error(err));
 
-// Routes
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/reports', reportRoutes);
 
-// Serve static assets if in production
+// Serve React app in production
 if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  // Serve static files from the React app's build directory
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-  // Serve the React app for all GET requests not matching the API
+  // If a route doesn't match an API, serve the React app
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
+// Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
