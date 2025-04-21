@@ -17,5 +17,20 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://YOUR_USERNAME.github.io/crime-report-app"
+  "homepage": "https://YOUR_USERNAME.github.io/crime-report-app",
+  "browserslist": {
+  "production": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all",
+    "last 2 Edge versions"
+  ],
+  "development": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version",
+    "last 1 edge version"
+  ]
+}
+
 }
