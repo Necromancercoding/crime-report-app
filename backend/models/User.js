@@ -27,8 +27,10 @@ UserSchema.pre('save', async function (next) {
 });
 
 // Method to compare entered password with stored hash
-UserSchema.methods.matchPassword = async function (enteredPassword) {
+UserSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;
